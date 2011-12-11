@@ -64,6 +64,20 @@ public class GameFinished extends Activity {
         tvText.setTag(typefaceSniglet);
 
         
+	    ImageView trophyg = (ImageView) findViewById(R.id.trophyg);
+	    ImageView trophys = (ImageView) findViewById(R.id.trophys);
+	    ImageView trophyb = (ImageView) findViewById(R.id.trophyb);
+        
+        if (win && !survivalgame && !multiplayer) {
+        	if (difficulty == 2)
+        		trophyg.setVisibility(0); 
+        	else if (difficulty == 1)
+        		trophys.setVisibility(0); 
+        	else
+        		trophyb.setVisibility(0); 
+        }
+        
+        
         if (win) {
         	tvTitle.setText("Congratulations!");
         	tvText.setText("You've slain all the vile rabbits and their evil companions and saved your precious carrots!");

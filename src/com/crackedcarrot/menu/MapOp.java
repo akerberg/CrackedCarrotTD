@@ -52,6 +52,12 @@ public class MapOp extends Activity implements ViewFactory {
 	int scoremap4 = 0;	
 	int scoremap5 = 0;	
 	int scoremap6 = 0;	
+	int killsmap1 = 0;	
+	int killsmap2 = 0;	
+	int killsmap3 = 0;	
+	int killsmap4 = 0;	
+	int killsmap5 = 0;	
+	int killsmap6 = 0;	
 	
 	
     /** The index for our "maps" array */
@@ -60,6 +66,7 @@ public class MapOp extends Activity implements ViewFactory {
     private int gameMode = 0;
         
     private TextView    tv;
+    private TextView score;
     
     private ImageView mBackground;
     
@@ -116,7 +123,12 @@ public class MapOp extends Activity implements ViewFactory {
     	scoremap4 = settings.getInt("scoremap4", 0);
     	scoremap5 = settings.getInt("scoremap5", 0);
     	scoremap6 = settings.getInt("scoremap6", 0);
-
+    	killsmap1 = settings.getInt("killsmap1", 0);
+    	killsmap2 = settings.getInt("killsmap2", 0);
+    	killsmap3 = settings.getInt("killsmap3", 0);
+    	killsmap4 = settings.getInt("killsmap4", 0);
+    	killsmap5 = settings.getInt("killsmap5", 0);
+    	killsmap6 = settings.getInt("killsmap6", 0);
         
         BitmapFactory.Options options=new BitmapFactory.Options();
         options.inSampleSize = 1;
@@ -258,7 +270,11 @@ public class MapOp extends Activity implements ViewFactory {
     	Typeface face = Typeface.createFromAsset(this.getAssets(), "fonts/MuseoSans_500.otf");
     	tv.setTypeface(face);
     	
-        gallery = (Gallery) findViewById(R.id.gallery1);
+        score = (TextView) this.findViewById(R.id.score);
+    	face = Typeface.createFromAsset(this.getAssets(), "fonts/MuseoSans_500.otf");
+    	score.setTypeface(face);
+
+    	gallery = (Gallery) findViewById(R.id.gallery1);
         gallery.setAdapter(new ImageAdapter(this));
         gallery.setOnItemSelectedListener(gItemSelectedHandler);
         
@@ -378,7 +394,7 @@ public class MapOp extends Activity implements ViewFactory {
     			radioSurvivalGame.setChecked(true);
     			
     			if (mapcompleted+1 == mapSelected) {
-                	CharSequence text = "Only normal mode unlocks the next map.";
+                	CharSequence text = "Only normal game unlocks the next map.";
             		int duration = Toast.LENGTH_SHORT;
             		Toast toast = Toast.makeText(getBaseContext(), text, duration);
             		toast.show();
@@ -482,14 +498,19 @@ public class MapOp extends Activity implements ViewFactory {
 						tv.setText("Map 1: 30 waves.");
 					
 					mapSelected = 1;
+					
+					score.setText("Best score:\nNormal game: " + scoremap1 + "\nSurvival game: " + killsmap1);
+					
 					break;
 				case 1: 
 			       	if (mapcompleted < 1) {
 						mapSelected = 2;
 						tv.setText("Map 2: Complete Map 1 to unlock.");
+						score.setText("");
 			       	}
 			       	else {
 			       		mapSelected = 2;
+						score.setText("Best score:\nNormal game: " + scoremap2 + "\nSurvival game: " + killsmap2);
 
 						if (difficultymap2 == 1)
 							tv.setText("Map 2: 35 waves. (Bronze)");
@@ -505,9 +526,11 @@ public class MapOp extends Activity implements ViewFactory {
 			       	if (mapcompleted < 2) {
 						mapSelected = 3;
 						tv.setText("Map 3: Complete Map 2 to unlock.");
+						score.setText("");
 			       	}
 			       	else {
 			       		mapSelected = 3;
+						score.setText("Best score:\nNormal game: " + scoremap3 + "\nSurvival game: " + killsmap3);
 
 						if (difficultymap3 == 1)
 							tv.setText("Map 3: 40 waves. (Bronze)");
@@ -523,9 +546,11 @@ public class MapOp extends Activity implements ViewFactory {
 			       	if (mapcompleted < 3) {
 						mapSelected = 4;
 						tv.setText("Map 4: Complete Map 3 to unlock.");
+						score.setText("");
 			       	}
 			       	else {
 			       		mapSelected = 4;
+						score.setText("Best score:\nNormal game: " + scoremap4 + "\nSurvival game: " + killsmap4);
 
 			       		if (difficultymap4 == 1)
 							tv.setText("Map 4: 45 waves. (Bronze)");
@@ -541,9 +566,11 @@ public class MapOp extends Activity implements ViewFactory {
 			       	if (mapcompleted < 4) {
 						mapSelected = 5;
 						tv.setText("Map 5: Complete Map 4 to unlock.");
+						score.setText("");
 			       	}
 			       	else {
 			       		mapSelected = 5;
+						score.setText("Best score:\nNormal game: " + scoremap5 + "\nSurvival game: " + killsmap5);
 
 			       		if (difficultymap5 == 1)
 							tv.setText("Map 5: 50 waves. (Bronze)");
@@ -559,9 +586,11 @@ public class MapOp extends Activity implements ViewFactory {
 			       	if (mapcompleted < 2) {
 						mapSelected = 6;
 						tv.setText("Map 6: Complete Map 5 to unlock.");
+						score.setText("");
 			       	}
 			       	else {
 			       		mapSelected = 6;
+						score.setText("Best score:\nNormal game: " + scoremap6 + "\nSurvival game: " + killsmap6);
 
 			       		if (difficultymap6 == 1)
 							tv.setText("Map 6: 55 waves. (Bronze)");
