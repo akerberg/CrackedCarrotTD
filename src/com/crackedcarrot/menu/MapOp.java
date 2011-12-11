@@ -5,6 +5,7 @@ import java.io.InputStream;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -38,8 +39,20 @@ import com.crackedcarrot.GameInit;
  */
 public class MapOp extends Activity implements ViewFactory {
 	
-	// If this is set to 0 let the player play on Normal difficulty. Will read data from integers.xml to set this
-	int fullversion = 0;
+	int mapcompleted = 0;
+	int difficultymap1 = 0;
+	int difficultymap2 = 0;
+	int difficultymap3 = 0;
+	int difficultymap4 = 0;
+	int difficultymap5 = 0;
+	int difficultymap6 = 0;
+	int scoremap1 = 0;	
+	int scoremap2 = 0;	
+	int scoremap3 = 0;	
+	int scoremap4 = 0;	
+	int scoremap5 = 0;	
+	int scoremap6 = 0;	
+	
 	
     /** The index for our "maps" array */
     private int difficulty = 1;
@@ -89,28 +102,143 @@ public class MapOp extends Activity implements ViewFactory {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainmenu_startgame);    
         
-        Resources r = getResources();
-        fullversion = r.getInteger(R.integer.app_type);
+        SharedPreferences settings = getSharedPreferences("progress", 0);
+        mapcompleted = settings.getInt("mapcompleted", 0);
+        difficultymap1 = settings.getInt("difficultymap1", 0);
+        difficultymap2 = settings.getInt("difficultymap2", 0);
+        difficultymap3 = settings.getInt("difficultymap3", 0);
+        difficultymap4 = settings.getInt("difficultymap4", 0);
+        difficultymap5 = settings.getInt("difficultymap5", 0);
+        difficultymap6 = settings.getInt("difficultymap6", 0);
+    	scoremap1 = settings.getInt("scoremap1", 0);
+    	scoremap2 = settings.getInt("scoremap2", 0);
+    	scoremap3 = settings.getInt("scoremap3", 0);
+    	scoremap4 = settings.getInt("scoremap4", 0);
+    	scoremap5 = settings.getInt("scoremap5", 0);
+    	scoremap6 = settings.getInt("scoremap6", 0);
+
         
         BitmapFactory.Options options=new BitmapFactory.Options();
-        options.inSampleSize = 8;
+        options.inSampleSize = 1;
         options.inPreferredConfig = Bitmap.Config.RGB_565;
-        InputStream is = this.getResources().openRawResource(R.drawable.map1);
+
+        InputStream is;
+        
+    	if (difficultymap1 == 3) {
+        	is = this.getResources().openRawResource(R.drawable.trophymap1g);
+    	}            
+    	else if (difficultymap1 == 2) {
+        	is = this.getResources().openRawResource(R.drawable.trophymap1s);
+    	}            
+    	else if (difficultymap1 == 1) {
+        	is = this.getResources().openRawResource(R.drawable.trophymap1b);
+    	}            
+    	else {
+        	is = this.getResources().openRawResource(R.drawable.previewmap1);            		
+    	}
+        
         
         try {
         	mmaps[0] = BitmapFactory.decodeStream(is, null, options);
-            is = this.getResources().openRawResource(R.drawable.map2);
+            if (mapcompleted < 1) {
+            	is = this.getResources().openRawResource(R.drawable.padlockmap2);
+            }
+            else {
+            	if (difficultymap2 == 3) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap2g);
+            	}            
+            	else if (difficultymap2 == 2) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap2s);
+            	}            
+            	else if (difficultymap2 == 1) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap2b);
+            	}            
+            	else {
+                	is = this.getResources().openRawResource(R.drawable.previewmap2);            		
+            	}
+            }
             mmaps[1] = BitmapFactory.decodeStream(is, null, options);
-        	if (fullversion == 0)
-        		options.inSampleSize = 1;   
-            is = this.getResources().openRawResource(R.drawable.map3);
+
+            
+            if (mapcompleted < 2){
+            	is = this.getResources().openRawResource(R.drawable.padlockmap3);
+            }
+            else {
+            	if (difficultymap3 == 3) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap3g);
+            	}            
+            	else if (difficultymap3 == 2) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap3s);
+            	}            
+            	else if (difficultymap3 == 1) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap3b);
+            	}            
+            	else {
+                	is = this.getResources().openRawResource(R.drawable.previewmap3);            		
+            	}
+            }
             mmaps[2] = BitmapFactory.decodeStream(is, null, options);
-            is = this.getResources().openRawResource(R.drawable.map4);
+
+            
+            if (mapcompleted < 3){
+            	is = this.getResources().openRawResource(R.drawable.padlockmap4);
+            }
+            else {
+            	if (difficultymap4 == 3) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap4g);
+            	}            
+            	else if (difficultymap4 == 2) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap4s);
+            	}            
+            	else if (difficultymap4 == 1) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap4b);
+            	}            
+            	else {
+                	is = this.getResources().openRawResource(R.drawable.previewmap4);            		
+            	}
+            }
             mmaps[3] = BitmapFactory.decodeStream(is, null, options);
-            is = this.getResources().openRawResource(R.drawable.map5);
+
+                        
+            if (mapcompleted < 4){
+            	is = this.getResources().openRawResource(R.drawable.padlockmap5);
+            }
+            else {
+            	if (difficultymap5 == 3) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap5g);
+            	}            
+            	else if (difficultymap5 == 2) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap5s);
+            	}            
+            	else if (difficultymap5 == 1) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap5b);
+            	}            
+            	else {
+                	is = this.getResources().openRawResource(R.drawable.previewmap5);            		
+            	}
+            }
             mmaps[4] = BitmapFactory.decodeStream(is, null, options);
-            is = this.getResources().openRawResource(R.drawable.map6);
+
+            
+            if (mapcompleted < 5){
+            	is = this.getResources().openRawResource(R.drawable.padlockmap6);
+            }
+            else {
+            	if (difficultymap6 == 3) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap6g);
+            	}            
+            	else if (difficultymap6 == 2) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap6s);
+            	}            
+            	else if (difficultymap6 == 1) {
+                	is = this.getResources().openRawResource(R.drawable.trophymap6b);
+            	}            
+            	else {
+                	is = this.getResources().openRawResource(R.drawable.previewmap6);            		
+            	}
+            }
             mmaps[5] = BitmapFactory.decodeStream(is, null, options);
+
         } finally {
             try {
                 is.close();
@@ -133,12 +261,22 @@ public class MapOp extends Activity implements ViewFactory {
         gallery = (Gallery) findViewById(R.id.gallery1);
         gallery.setAdapter(new ImageAdapter(this));
         gallery.setOnItemSelectedListener(gItemSelectedHandler);
-        gallery.setSelection((gallery.getCount()/2)-2, true);
+        
+        //gallery.setSelection((gallery.getCount()/2)-2, true);
+        gallery.setSelection(0, true);
 
         StartGameButton = (Button)findViewById(R.id.startmap);
         StartGameButton.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		//Send the level variable to the game loop and start it
+
+            	if (mapcompleted+1 < mapSelected) {
+	        		CharSequence text = "You need to complete previous map before starting this map.";
+	        		int duration = Toast.LENGTH_SHORT;
+	        		Toast toast = Toast.makeText(getBaseContext(), text, duration);
+	        		toast.show();
+	        		return;
+            	}
         		
         		StartGameButton.setVisibility(View.INVISIBLE);
         		
@@ -185,6 +323,10 @@ public class MapOp extends Activity implements ViewFactory {
         	public void onClick(View v) {
         		difficulty = 0;
         		setRadioButtons(0);
+            	CharSequence text = "For beginners. Gives the bronze trophy at completion.";
+        		int duration = Toast.LENGTH_SHORT;
+        		Toast toast = Toast.makeText(getBaseContext(), text, duration);
+        		toast.show();
 			}
 
         });
@@ -193,6 +335,10 @@ public class MapOp extends Activity implements ViewFactory {
         	public void onClick(View v) {
         		difficulty = 1;
         		setRadioButtons(1);
+            	CharSequence text = "For the average player. Gives the silver trophy at completion.";
+        		int duration = Toast.LENGTH_SHORT;
+        		Toast toast = Toast.makeText(getBaseContext(), text, duration);
+        		toast.show();
 			}
         });
 
@@ -200,6 +346,10 @@ public class MapOp extends Activity implements ViewFactory {
         	public void onClick(View v) {
     			difficulty = 2;
     			setRadioButtons(2);
+            	CharSequence text = "For experienced players. Gives the gold trophy at completion.";
+        		int duration = Toast.LENGTH_SHORT;
+        		Toast toast = Toast.makeText(getBaseContext(), text, duration);
+        		toast.show();
 			}
         }); 
 
@@ -214,7 +364,7 @@ public class MapOp extends Activity implements ViewFactory {
         
        	radioSurvivalGame.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
-        		if (fullversion == 0) {
+        		/*if (fullversion == 0) {
                 	CharSequence text = "Survival is not available in this version.";
             		int duration = Toast.LENGTH_SHORT;
             		Toast toast = Toast.makeText(getBaseContext(), text, duration);
@@ -222,12 +372,24 @@ public class MapOp extends Activity implements ViewFactory {
         			gameMode = 0;
             		radioNormalGame.setChecked(true);
             		radioSurvivalGame.setChecked(false);
-        		}
-        		else {
-        			gameMode=3;
-        			radioNormalGame.setChecked(false);
-        			radioSurvivalGame.setChecked(true);
-        		}
+        		}*/
+    			gameMode=3;
+    			radioNormalGame.setChecked(false);
+    			radioSurvivalGame.setChecked(true);
+    			
+    			if (mapcompleted+1 == mapSelected) {
+                	CharSequence text = "Only normal mode unlocks the next map.";
+            		int duration = Toast.LENGTH_SHORT;
+            		Toast toast = Toast.makeText(getBaseContext(), text, duration);
+            		toast.show();
+    			} 
+    			else {
+                	//CharSequence text = ".";
+            		//int duration = Toast.LENGTH_SHORT;
+            		//Toast toast = Toast.makeText(getBaseContext(), text, duration);
+            		//toast.show();
+    				
+    			}
         	}
 
         });        
@@ -307,54 +469,108 @@ public class MapOp extends Activity implements ViewFactory {
    OnItemSelectedListener() {
       //@Override
        public void onItemSelected(AdapterView<?> parent, View v, int _position, long id) {
-    	   _position =  _position%6;
+    	   //_position =  _position%6;
     	   switch(_position){
-				case 0:
-					tv.setText("Map 1: The field of long grass.");
+				case 0:			
+					if (difficultymap1 == 1)
+						tv.setText("Map 1: 30 waves. (Bronze)");
+					else if (difficultymap1 == 2)
+						tv.setText("Map 1: 30 waves. (Silver)");
+					else if (difficultymap1 == 3)
+						tv.setText("Map 1: 30 waves. (Gold)");
+					else
+						tv.setText("Map 1: 30 waves.");
+					
 					mapSelected = 1;
 					break;
 				case 1: 
-		       		mapSelected = 2;
-					tv.setText("Map 2: The field of cold grass.");
-					break;	
+			       	if (mapcompleted < 1) {
+						mapSelected = 2;
+						tv.setText("Map 2: Complete Map 1 to unlock.");
+			       	}
+			       	else {
+			       		mapSelected = 2;
+
+						if (difficultymap2 == 1)
+							tv.setText("Map 2: 35 waves. (Bronze)");
+						else if (difficultymap2 == 2)
+							tv.setText("Map 2: 35 waves. (Silver)");
+						else if (difficultymap2 == 3)
+							tv.setText("Map 2: 35 waves. (Gold)");
+						else
+							tv.setText("Map 2: 35 waves.");			       		
+			       	}
+			       	break;	
 				case 2: 
-			       	if (fullversion == 0) {
-						mapSelected = 1;
-						tv.setText("Map 3: Not available in this version.");
+			       	if (mapcompleted < 2) {
+						mapSelected = 3;
+						tv.setText("Map 3: Complete Map 2 to unlock.");
 			       	}
 			       	else {
 			       		mapSelected = 3;
-			       		tv.setText("Map 3: The field of no grass.");
-			       	}
+
+						if (difficultymap3 == 1)
+							tv.setText("Map 3: 40 waves. (Bronze)");
+						else if (difficultymap3 == 2)
+							tv.setText("Map 3: 40 waves. (Silver)");
+						else if (difficultymap3 == 3)
+							tv.setText("Map 3: 40 waves. (Gold)");
+						else
+							tv.setText("Map 3: 40 waves.");			    
+					}
 					break;
 				case 3: 
-			       	if (fullversion == 0) {
-						mapSelected = 1;
-						tv.setText("Map 4: Not available in this version.");
+			       	if (mapcompleted < 3) {
+						mapSelected = 4;
+						tv.setText("Map 4: Complete Map 3 to unlock.");
 			       	}
 			       	else {
 			       		mapSelected = 4;
-			       		tv.setText("Map 4: The field of long grass v2.");
+
+			       		if (difficultymap4 == 1)
+							tv.setText("Map 4: 45 waves. (Bronze)");
+						else if (difficultymap4 == 2)
+							tv.setText("Map 4: 45 waves. (Silver)");
+						else if (difficultymap4 == 3)
+							tv.setText("Map 4: 45 waves. (Gold)");
+						else
+							tv.setText("Map 4: 45 waves.");			    
 			       	}
 					break;
 				case 4: 
-			       	if (fullversion == 0) {
-						mapSelected = 1;
-						tv.setText("Map 5: Not available in this version.");
+			       	if (mapcompleted < 4) {
+						mapSelected = 5;
+						tv.setText("Map 5: Complete Map 4 to unlock.");
 			       	}
 			       	else {
 			       		mapSelected = 5;
-			       		tv.setText("Map 5: The field of cold grass v2.");
+
+			       		if (difficultymap5 == 1)
+							tv.setText("Map 5: 50 waves. (Bronze)");
+						else if (difficultymap5 == 2)
+							tv.setText("Map 5: 50 waves. (Silver)");
+						else if (difficultymap5 == 3)
+							tv.setText("Map 5: 50 waves. (Gold)");
+						else
+							tv.setText("Map 5: 50 waves.");			    
 			       	}
 			       	break;	
 				case 5: 
-			       	if (fullversion == 0) {
-						mapSelected = 1;
-						tv.setText("Map 6: Not available in this version.");
+			       	if (mapcompleted < 2) {
+						mapSelected = 6;
+						tv.setText("Map 6: Complete Map 5 to unlock.");
 			       	}
 			       	else {
 			       		mapSelected = 6;
-			       		tv.setText("Map 6: The field of no grass v2.");
+
+			       		if (difficultymap6 == 1)
+							tv.setText("Map 6: 55 waves. (Bronze)");
+						else if (difficultymap6 == 2)
+							tv.setText("Map 6: 55 waves. (Silver)");
+						else if (difficultymap6 == 3)
+							tv.setText("Map 6: 55 waves. (Gold)");
+						else
+							tv.setText("Map 6: 55 waves.");			    
 			       	}
 					break;
 			}
@@ -370,7 +586,7 @@ public class MapOp extends Activity implements ViewFactory {
     {
         private Context context;
         //private int itemBackground;
-        public int position;
+        public int position = 0;
         private int x;
         private int y;
         
@@ -382,21 +598,25 @@ public class MapOp extends Activity implements ViewFactory {
  
         //---returns the number of images---
         public int getCount() {
-        	return 1000;
+        	//return 1000;
+        	return 6;
         }
  
         public Object getItem(int position) {
-            return position%6;
+            //return position%6;
+            return position;
         }
  
         public long getItemId(int position) {
-            return position%5;
+            //return position%5;
+            return position;
         }
  
         //---returns an ImageView view---
         public View getView(int position, View convertView, ViewGroup parent)
         {
-        	this.position = position%6;
+        	this.position = position;
+        	//this.position = position%6;
         	ImageView imageView = new ImageView(context);
             imageView.setImageBitmap(mmaps[this.position]);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -404,6 +624,7 @@ public class MapOp extends Activity implements ViewFactory {
             imageView.setBackgroundResource(R.drawable.xml_gallery);
             return imageView;
         }
+
    }
     
 }
