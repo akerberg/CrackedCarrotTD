@@ -101,7 +101,7 @@ public class SoundManager {
 		 mContext = context;
 		 // number 4 is the total number of concurrently playing sounds. if 4 are already
 		 // playing the oldest one will be replaced. we can change if necessary.
-	     mSoundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
+	     mSoundPool = new SoundPool(6, AudioManager.STREAM_MUSIC, 0);
 	     mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 	     
 	} 

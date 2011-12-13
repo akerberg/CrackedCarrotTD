@@ -663,7 +663,10 @@ public class GameLoopGUI {
 	    	//break;
 	    	
 	    case DIALOG_PAUSE_ID:
-	    	dialogPause = new Dialog(gameInit, R.style.InGameMenu);
+	    	
+	    	dialogPause = new Dialog(gameInit,R.style.NextlevelTheme);
+
+	    	//dialogPause = new Dialog(gameInit, R.style.InGameMenu);
 	        dialogPause.setContentView(R.layout.levelpause);
 	    	dialogPause.setCancelable(true);
 	    	
@@ -754,12 +757,12 @@ public class GameLoopGUI {
 	    		});
 	    	
 	    		// Makes the background of the dialog blurred.
-	    	if (!multiplayerMode) {
+	    	/*if (!multiplayerMode) {
 		        lp = dialogPause.getWindow().getAttributes();
 		        dialogPause.getWindow().setAttributes(lp);
-		        dialogPause.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,
+		        dialogPause.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,
 		            WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
-	    	}
+	    	}*/
 
 	    	return dialogPause;
 	    
@@ -1325,6 +1328,8 @@ public class GameLoopGUI {
 			this.icon_poison.setVisibility(View.VISIBLE);
 			
 		
+		towerstats.setVisibility(View.VISIBLE);
+		
 		gameInit.mGLSurfaceView.setTowerType(-1);
 		hud.hideGrid();
 		this.towertext.setVisibility(View.GONE);
@@ -1332,15 +1337,17 @@ public class GameLoopGUI {
 		towerbutton2.setVisibility(View.GONE);
 		towerbutton3.setVisibility(View.GONE);
 		towerbutton4.setVisibility(View.GONE);
-		play.setVisibility(View.GONE);
-		forward.setVisibility(View.GONE);
+		//play.setVisibility(View.GONE);
+		//forward.setVisibility(View.GONE);
 		
 		towerUpgrade.setVisibility(View.VISIBLE);
+		towerstats.setVisibility(View.VISIBLE);
 	}
 	
 	public void hideTowerUpgrade() {
 
 		towerUpgrade.setVisibility(View.GONE);
+		towerstats.setVisibility(View.GONE);
 
 		if (gameInit.gameLoop.gameSpeed ==1) {
 			forward.setVisibility(View.VISIBLE);

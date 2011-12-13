@@ -583,7 +583,7 @@ public class MapOp extends Activity implements ViewFactory {
 			       	}
 			       	break;	
 				case 5: 
-			       	if (mapcompleted < 2) {
+			       	if (mapcompleted < 5) {
 						mapSelected = 6;
 						tv.setText("Map 6: Complete Map 5 to unlock.");
 						score.setText("");

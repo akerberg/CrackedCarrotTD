@@ -154,7 +154,7 @@ public class TowerLoader {
 							String soundfile = tmpStr[1].trim();
 							if (!soundfile.equals("none")) {
 								sound_l = context.getResources().getIdentifier(soundfile, "raw", context.getPackageName());
-								sound_l = soundManager.addSound(1.0f, 300, sound_l);
+								sound_l = soundManager.addSound(1.0f, 200, sound_l);
 							}
 							else sound_l = -1;
 							break;
@@ -163,7 +163,7 @@ public class TowerLoader {
 							String soundfile2 = tmpStr[1].trim();
 							if (!soundfile2.equals("none")) {
 								sound_i = context.getResources().getIdentifier(soundfile2, "raw", context.getPackageName());
-								sound_i = soundManager.addSound(1.0f, 300, sound_i);
+								sound_i = soundManager.addSound(1.0f, 200, sound_i);
 							}
 							else sound_i = -1;
 

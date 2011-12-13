@@ -1,6 +1,10 @@
 package com.crackedcarrot;
 
 import java.util.Random;
+
+import android.os.Debug;
+import android.util.Log;
+
 import com.crackedcarrot.menu.R;
 
 /**
@@ -416,8 +420,10 @@ public class Tower extends Sprite {
 	 */
 	private void towerStartFireSequence(Creature targetCreature) {
 		if (targetCreature != null) {
-			if (sound_l != -1)
+			//Log.d("Tjena", ""+sound_l);
+			if (sound_l != -1) {
 				soundManager.playSound(sound_l);
+			}
 			this.relatedShot.draw = true;
 			this.targetCreatureMapLap = targetCreature.mapLap;
 		}

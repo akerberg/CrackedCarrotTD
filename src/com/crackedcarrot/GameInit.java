@@ -188,6 +188,7 @@ public class GameInit extends Activity {
         soundManager = new SoundManager(getBaseContext());
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
         
+        
         //Define player specific variables depending on difficulty.
         Player p;
         if (difficulty == 0) {

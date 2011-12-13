@@ -126,7 +126,7 @@ public class GameFinished extends Activity {
 	        
 	        int mapCompleted = settings.getInt("mapcompleted", 0);
 	        
-	        if (mapCompleted > mapChoice) {
+	        if (mapCompleted < mapChoice) {
 		        editor.putInt("mapcompleted", mapChoice);
 		        editor.commit();        
 	        }
